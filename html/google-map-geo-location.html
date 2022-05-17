@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>ISP Maps </title>
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+        }
+
+        body,
+        input {
+            font-family: Georgia, "Times New Roman", Times, serif;
+        }
+
+        #map {
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .info-window {
+            padding: 10px;
+            font-size: 1.5em;
+            vertical-align: middle;
+        }
+
+        .info-window a {
+            padding: 13px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 10px;
+            text-decoration: none;
+            background-color: #3980fe;
+        }
+
+        .app-bar {
+            top: 9;
+            z-index: 2;
+            width: 100%;
+            height: 10px;
+            position: fixed;
+            margin-bottom: 10px;
+            background: linear-gradient(to left, #27292b, #27292b);
+        }
+
+        .input-field {
+            margin-top: 10px;
+            border-radius: 10px;
+            display: inline-block;
+            height: 30px;
+            padding: 5px 20px 5px 20px;
+            background-color: #ffffff;
+        }
+
+        .input-field input {
+            width: 300px;
+            border: none;
+            color: #333;
+            outline: none;
+            font-weight: 600;
+            background: none;
+            line-height: 40px;
+        }
+
+        .input-field input::placeholder {
+            color: #3a3a3a;
+            font-weight: 500;
+        }
+
+        .btn {
+            display: inline;
+            height: 30px;
+            margin-left: 0px;
+            margin-top: auto;
+            padding: 5px;
+            border: none;
+            outline: none;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 10px;
+            z-index: 2;
+        }
+
+        .btn:hover {
+            background-color: #ff9d41;
+        }
+
+        .app-bar .title {
+            color: #232428;
+            display: inline;
+            vertical-align: middle;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            margin: 5px 15px 15px 5px;
+            vertical-align: middle;
+        }
+
+        .title {
+            color: white;
+            z-index: 10;
+        }
+
+        .cards{
+            display: grid;
+            grid-template-columns:repeat(auto-fill, minmax(230px, 1fr));
+            grid-gap: 20px;
+        }
+        .card{
+            display: grid;
+            grid-template-rows:max-content 200px 1fr;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-bar" >
+        
+        <div class="input-field ">
+            <input id="autocomplete" type="text" placeholder="Enter address..." />
+        </div>
+        <button class="btn " style="background-color: rgb(91, 207, 91);" id="btnSearch">Search</button>
+        <button class="btn " style="background-color: #EB435A;" id="btnRemove">Remove your markers</button>
+        <button class="btn " style="background-color: #3980FE;" id="btnWhereAmI">My location?</button>
+    </div>
+    <div id="map"></div>
+
+
+    <div class="cards">
+        <div class="card">
+            <div id="listing">
+                <table id="resultsTable">
+                <tbody id="results"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+   
+      <div style="display: grid">
+        <div id="info-content">
+          <table>
+            <tr id="iw-url-row" class="iw_table_row">
+              <td id="iw-icon" class="iw_table_icon"></td>
+              <td id="iw-url"></td>
+            </tr>
+            <tr id="iw-address-row" class="iw_table_row">
+              <td class="iw_attribute_name"></td>
+              <td id="iw-address"></td>
+            </tr>
+            <tr id="iw-phone-row" class="iw_table_row">
+              <td class="iw_attribute_name"></td>
+              <td id="iw-phone"></td>
+            </tr>
+            <tr id="iw-rating-row" class="iw_table_row">
+              <td class="iw_attribute_name"></td>
+              <td id="iw-rating"></td>
+            </tr>
+            <tr id="iw-website-row" class="iw_table_row">
+              <td class="iw_attribute_name"></td>
+              <td id="iw-website"></td>
+            </tr>
+            <tr id="iw-url-row" class="iw_table_row">
+              <td id="iw-Copy",  class="iw-url"></td>
+            </tr>
+            <!--<tr id="iw-url-row" class="iw_table_row">
+              <td id="iw-CopyB"> <button class="btn" attr-lat="" attr-lgn="" ></button></td>
+            </tr>-->
+          </table>
+        </div>
+      </div>
+      
+      
+   
+      <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+      <div id="map"></div>
+      <div id="infowindow-content">
+        <img id="place-icon" src="" height="16" width="16">
+        <span id="place-name"  class="title"></span><br>
+        <span id="place-id"></span><br>
+        <span id="place-address"></span>
+      </div>
+
+    
+    <script type="text/javascript"></script>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap" async></script>-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=places&callback=initMap" async defer></script> 
+    
+    <script src="index.js"></script>
+</body>
+
+</html>
