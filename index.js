@@ -51,7 +51,7 @@ const counties = {
   
   ke: {
     center: { lat: 0.0236, lng: 37.9062 },
-    zoom: 3,
+    zoom: 4,
   },
   
 };
@@ -63,7 +63,7 @@ const counties = {
 function initMap() {
   myLatlng = { lat: 0.0236, lng: 37.9062 };
   map = new google.maps.Map(document.getElementById("map"), {
-    zoom: counties["ke"].zoom,
+    zoom: counties["ke"].zoom ,
     center: myLatlng,
     mapTypeControl: true,
     panControl: true,
@@ -204,7 +204,7 @@ function addResult(result, i) {
   const tr = document.createElement("tr");
  
   tr.style.backgroundColor = i % 2 === 0 ? "#F0F0F0" : "#FFFFFF";
-  tr.style.display = i % 2 == 0 ? "grid":
+  tr.style.display = i % 2 == 0 ? "flow-root":
   tr.onclick = function () {
     google.maps.event.trigger(markers[i], "click");
   };
@@ -274,7 +274,7 @@ function buildIWContent(place) {
 
     //copy button
     //document.getElementById("iw-Copy").innerHTML.share = window.open('//www.twitter.com/share?url= '  + place.url );
-    document.getElementById("iw-Copy").innerHTML ='<b><b>share location of:</b> \n<a href="//www.twitter.com/share?url=' +place.url + ' Hey! i would like internet at this location" >' + place.name + "</a></b>";
+    //*****document.getElementById("iw-Copy").innerHTML ='<b><b>share location of:</b> \n<a href="//www.twitter.com/share?url=' +place.url + ' Hey! i would like internet at this location" >' + place.name + "</a></b>";
     //document.getElementById("iw-Copy").innerHTML ='<b><b>share location of:</b> \n<a href="https://web.whatsapp.com/share?url=' +place.url + ' Hey! i would like internet at this location" >' + place.name + "</a></b>";
     //var lat= $ (".btn").attr("place.url");
     //end copy button
@@ -362,6 +362,8 @@ function whereAmI(position) {
   });
   location_marker.setMap(map);
   markers.push(location_marker);
+  map.panTo(whereAmI);
+  map.setZoom(15);
 }
 
 const features = [];
@@ -375,6 +377,9 @@ const features = [];
             buttonAdd.addEventListener("click", () => {
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(whereAmI, geoLocateErrorhandler);
+                    map.panTo(navigator.geolocation.getCurrentPosition);
+                    map.setZoom(15);
+                    search();
                 } else {
                     alert("Browser does not support Geo Location Service.");
                 }

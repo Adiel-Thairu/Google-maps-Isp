@@ -44,28 +44,29 @@
             z-index: 2;
             width: 100%;
             height: 10px;
-            position: fixed;
+            position: absolute;
             margin-bottom: 10px;
             background: linear-gradient(to left, #27292b, #27292b);
         }
 
         .input-field {
-            margin-top: 10px;
             border-radius: 10px;
-            display: inline-block;
+            display: table-cell;
             height: 30px;
             padding: 5px 20px 5px 20px;
             background-color: #ffffff;
+            width: 100px;
         }
 
         .input-field input {
-            width: 300px;
+          
+            width: 290px;
             border: none;
             color: #333;
             outline: none;
             font-weight: 600;
             background: none;
-            line-height: 40px;
+            line-height: 0px;
         }
 
         .input-field input::placeholder {
@@ -74,18 +75,22 @@
         }
 
         .btn {
-            display: inline;
-            height: 30px;
-            margin-left: 0px;
-            margin-top: auto;
+            width: 80%;
+            height: calc(33.3% -25px);
+            margin-left: 10px;
             padding: 5px;
             border: none;
-            outline: none;
+            outline:#232428;
             color: white;
             cursor: pointer;
             font-weight: 600;
             border-radius: 10px;
-            z-index: 2;
+            z-index: 1;
+            
+            
+            
+          
+            
         }
 
         .btn:hover {
@@ -110,33 +115,64 @@
             z-index: 10;
         }
 
-        .cards{
-            display: grid;
-            grid-template-columns:repeat(auto-fill, minmax(230px, 1fr));
-            grid-gap: 20px;
+        .card-container{
+            position: relative;
+            width: calc(100% - 25px);
+            height: calc(33.3% -25px);
+            margin: 90px;
+            padding: 8px;
+            text-align: center;
+            opacity: .89;
+        }
+        .card-container:hover,
+        .card-container:focus{
+          opacity: 1;
+
         }
         .card{
-            display: grid;
-            grid-template-rows:max-content 200px 1fr;
+            display: block;
+            position: absolute;
+            cursor: pointer;
+            width: 50%;
+            height: 50%;
+            z-index: 1;
+            transform: translateZ(34px);
+            
             
         }
+        .search-container {
+            display: flex;
+            margin-top: 80px;
+            gap: 10px;
+            flex-direction: column;
+            background-color: #3a3a3a71;
+            height: auto;
+            width: 30%;
+            
+            
+           
+            
+            
+            
+        }
+        
+        
     </style>
 </head>
 
 <body>
     <div class="app-bar" >
-        
-        <div class="input-field ">
-            <input id="autocomplete" type="text" placeholder="Enter address..." />
+        <div class="search-container">
+          <button class="btn " style="background-color: #3980FE;" id="btnWhereAmI">My location?</button>
+          <button class="btn " style="background-color: rgb(91, 207, 91);" id="btnSearch">Search</button>
+          <button class="btn " style="background-color: #EB435A;" id="btnRemove">Remove your markers</button>
+          <div class="input-field btn"><input id="autocomplete" type="text"></div>
         </div>
-        <button class="btn " style="background-color: rgb(91, 207, 91);" id="btnSearch">Search</button>
-        <button class="btn " style="background-color: #EB435A;" id="btnRemove">Remove your markers</button>
-        <button class="btn " style="background-color: #3980FE;" id="btnWhereAmI">My location?</button>
     </div>
     <div id="map"></div>
 
 
-    <div class="cards">
+    <div class="card-container">
         <div class="card">
             <div id="listing">
                 <table id="resultsTable">
@@ -193,7 +229,9 @@
     
     <script type="text/javascript"></script>
     <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap" async></script>-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=places&callback=initMap" async defer></script> 
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=places&callback=initMap" async defer></script>-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZVP-wJa0wwRbdcn6_aPIwjayaSJd5uoY&callback=initMap&libraries=places&callback=initMap" async defer></script>
+    
     
     <script src="index.js"></script>
 </body>
