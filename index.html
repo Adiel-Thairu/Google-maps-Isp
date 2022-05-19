@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1,user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1,user-scalable=no">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>ISP Maps </title>
     <style>
@@ -21,12 +22,14 @@
         #map {
             height: 100vh;
             width: 100vw;
+            
         }
 
         .info-window {
             padding: 10px;
             font-size: 1.5em;
             vertical-align: middle;
+            z-index: auto;
         }
 
         .info-window a {
@@ -85,7 +88,7 @@
             cursor: pointer;
             font-weight: 600;
             border-radius: 10px;
-            z-index: 1;
+            z-index: 0;
             
             
             
@@ -117,12 +120,13 @@
 
         .card-container{
             position: relative;
-            width: calc(100% - 25px);
-            height: calc(33.3% -25px);
+            width: 50%;
+            height: 100%;
             margin: 90px;
             padding: 8px;
             text-align: center;
-            opacity: .89;
+            
+            
         }
         .card-container:hover,
         .card-container:focus{
@@ -133,12 +137,10 @@
             display: block;
             position: absolute;
             cursor: pointer;
-            width: 50%;
-            height: 50%;
+            height: 100vh;
+            width: 100vw;
             z-index: 1;
-            transform: translateZ(34px);
-            
-            
+            transform: translateZ(34px); 
         }
         .search-container {
             display: flex;
@@ -147,14 +149,33 @@
             flex-direction: column;
             background-color: #3a3a3a71;
             height: auto;
-            width: 30%;
-            
-            
-           
-            
-            
-            
+            width: 30%;  
         }
+
+        #results{
+          display: flex;
+          flex-direction:row;
+          flex-wrap: wrap;
+          align-items: flex-start;
+          flex-basis: auto;
+          
+
+          
+        }
+        .search-list{
+          border: 1px dashed rgb(255, 255, 255);
+          align-content: center;
+          font-size: 17px;
+          font-weight: bold;
+          text-align: center;
+          font-family: Georgia, 'Times New Roman', Times, serif;
+          background: linear-gradient(to left, #27292bc7, #27292b);
+          color: #ffffff;
+          
+
+          
+        }
+        
         
         
     </style>
@@ -172,15 +193,24 @@
     <div id="map"></div>
 
 
-    <div class="card-container">
+    
         <div class="card">
+          <div class="search-list" >
+            <p>Search results will appear hear</p>
+            <hr>
+          </div>
             <div id="listing">
                 <table id="resultsTable">
-                <tbody id="results"></tbody>
+                  <tr>
+                    <td id="results"></td></td>
+                  </tr>
+                  <tr>
+                    <td id="results"></td>
+                  </tr>
                 </table>
             </div>
         </div>
-    </div>
+    
    
       <div style="display: grid">
         <div id="info-content">
@@ -206,7 +236,8 @@
               <td id="iw-website"></td>
             </tr>
             <tr id="iw-url-row" class="iw_table_row">
-              <td id="iw-Copy",  class="iw-url"></td>
+              <td class="iw_attribute_name"></td>
+              <td id="iw-Copy"  class="iw-url"></td>
             </tr>
             <!--<tr id="iw-url-row" class="iw_table_row">
               <td id="iw-CopyB"> <button class="btn" attr-lat="" attr-lgn="" ></button></td>

@@ -77,18 +77,20 @@ function initMap() {
     position: myLatlng,
   });
 
-  map.addListener("click", (mapsMouseEvent) => {
+
+    //*****MAP-LONGITUDE AND LANGITUDE CLICK */
+  //**map.addListener("click", (mapsMouseEvent) => {
     // Close the current InfoWindow.
-    infoWindow.close();
+    //**infoWindow.close();
     // Create a new InfoWindow.
-    infoWindow = new google.maps.InfoWindow({
-      position: mapsMouseEvent.latLng,
-    });
-    infoWindow.setContent(
-      JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
-    );
-    infoWindow.open(map);
-  });
+    //**infoWindow = new google.maps.InfoWindow({
+     //** */ position: mapsMouseEvent.latLng,
+    //** */});
+    //**infoWindow.setContent(
+      //**JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+    //** */);
+    //**infoWindow.open(map);
+ //** */ });
   // Create the autocomplete object and associate it with the UI input control.
   // Restrict the search to the default country, and to place type "cities".
   autocomplete = new google.maps.places.Autocomplete(
@@ -202,12 +204,21 @@ function addResult(result, i) {
   const markerLetter = String.fromCharCode("A".charCodeAt(0) + (i % 26));
   const markerIcon = MARKER_PATH + markerLetter + ".png";
   const tr = document.createElement("tr");
- 
+  
+  
+  
+  
+  //create table table column
   tr.style.backgroundColor = i % 2 === 0 ? "#F0F0F0" : "#FFFFFF";
-  tr.style.display = i % 2 == 0 ? "flow-root":
+  tr.style.flexDirection = "row";
+  tr.style.flexFlow= i? "row-wrap":
+  tr.style.flexFlow = "row-wrap";
+  
   tr.onclick = function () {
     google.maps.event.trigger(markers[i], "click");
   };
+
+  
  
   const iconTd = document.createElement("td");
   const nameTd = document.createElement("td");
@@ -274,7 +285,7 @@ function buildIWContent(place) {
 
     //copy button
     //document.getElementById("iw-Copy").innerHTML.share = window.open('//www.twitter.com/share?url= '  + place.url );
-    //*****document.getElementById("iw-Copy").innerHTML ='<b><b>share location of:</b> \n<a href="//www.twitter.com/share?url=' +place.url + ' Hey! i would like internet at this location" >' + place.name + "</a></b>";
+  document.getElementById("iw-Copy").innerHTML ='<b> share location of:\n<a href="//www.twitter.com/share?url=' +place.url + ' Hey! i would like internet at this location" >' + place.name + "</a></b>";
     //document.getElementById("iw-Copy").innerHTML ='<b><b>share location of:</b> \n<a href="https://web.whatsapp.com/share?url=' +place.url + ' Hey! i would like internet at this location" >' + place.name + "</a></b>";
     //var lat= $ (".btn").attr("place.url");
     //end copy button
