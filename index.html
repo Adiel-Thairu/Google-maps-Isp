@@ -53,12 +53,14 @@
         }
 
         .input-field {
-            border-radius: 10px;
+            border-radius: 0px;
             display: table-cell;
             height: 30px;
             padding: 5px 20px 5px 20px;
             background-color: #ffffff;
             width: 100px;
+            align-self: center;
+            margin-top: 10px;
         }
 
         .input-field input {
@@ -78,26 +80,31 @@
         }
 
         .btn {
-            width: 80%;
+            width: 70%;
             height: calc(33.3% -25px);
-            margin-left: 10px;
+            margin-bottom: 10px;
             padding: 5px;
             border: none;
             outline:#232428;
-            color: white;
+            color: black;
             cursor: pointer;
             font-weight: 600;
             border-radius: 10px;
             z-index: 0;
-            
-            
-            
-          
-            
+            align-self: center;  
         }
 
+        hr{
+           
+           width: 250px;
+           margin-left:auto;
+           margin-right: auto;
+           background-color: #3a3a3a;
+           
+         } 
+
         .btn:hover {
-            background-color: #ff9d41;
+            background-color: #ffffff;
         }
 
         .app-bar .title {
@@ -145,11 +152,12 @@
         .search-container {
             display: flex;
             margin-top: 80px;
+            margin-left: 40px;
             gap: 10px;
             flex-direction: column;
-            background-color: #3a3a3a71;
-            height: auto;
-            width: 30%;  
+            background-color: #000000bb;
+            height: fit-content;
+            width: fit-content;  
         }
 
         #results{
@@ -158,8 +166,11 @@
           flex-wrap: wrap;
           align-items: flex-start;
           flex-basis: auto;
+          margin-top: 10px;
+          border-collapse: collapse;
           
-
+          
+          
           
         }
         .search-list{
@@ -175,7 +186,89 @@
 
           
         }
+
+        /*TEST CASE FOR NEW CARDS*/
+        /* Float four columns side by side */
+        .column {
+          
+          width:100%;
+          padding: 0 10px;
+          display: flex;
+          flex-direction:row;
+          flex-wrap: wrap;
+          align-items: flex-start;
+          flex-basis: auto;
+          
+          
+          
+        }
+
+        /* Remove extra left and right margins, due to padding */
+        .row {
+          margin: 0 -5px;
+          border-spacing: 30px;
+          
+          
         
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+          content: "";
+          display: flex;
+          flex-direction:row;
+          flex-wrap: wrap;
+          align-items: flex-start;
+          flex-basis: auto;
+          clear: both;
+          
+        }
+
+        /* Responsive columns */
+        @media screen and (max-width: 600px) {
+          .column {
+            width: 100%;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction:row;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            flex-basis: auto;
+          
+          }
+        }
+
+        /* Style the counter cards */
+        .cards {
+          box-shadow: 0 4px 8px 0 rgb(0, 0, 0);
+          padding: 16px;
+          text-align: center;
+          background-color: #f1f1f1;
+          display:block;
+          width: 100%;
+          margin-top: 10px;
+          
+         
+          
+        }
+
+        .heading{
+          display:inline block;
+        }
+        /*END TEST CASE FOR NEW CARDS*/
+        
+        td:nth-child(2){
+          flex-basis: 100%;
+          text-align: left;
+          display: flex;
+          padding: 5px;
+          border-spacing: 25px;
+        }
+        tr{
+          border-style: outset;
+          border-spacing: 15px;
+        }
+
         
         
     </style>
@@ -184,33 +277,33 @@
 <body>
     <div class="app-bar" >
         <div class="search-container">
-          <button class="btn " style="background-color: #3980FE;" id="btnWhereAmI">My location?</button>
-          <button class="btn " style="background-color: rgb(91, 207, 91);" id="btnSearch">Search</button>
-          <button class="btn " style="background-color: #EB435A;" id="btnRemove">Remove your markers</button>
-          <div class="input-field btn"><input id="autocomplete" type="text"></div>
+          <div class="input-field "><input id="autocomplete" type="text"></div>
+          <button class="btn " style="background-color: #ffffff;" id="btnWhereAmI">My location?</button>
+          <button class="btn " style="background-color: #ffffff;" id="btnSearch">Search</button>
+          <button class="btn " style="background-color: #ffffff;" id="btnRemove">Remove your markers</button>
         </div>
     </div>
     <div id="map"></div>
 
-
-    
-        <div class="card">
-          <div class="search-list" >
-            <p>Search results will appear hear</p>
+    <!--TEST CARD CASES-->
+    <div class="row">
+      <div class="column">
+        <div class="cards">
+          <h6 class="heading"><img src="http://maps.google.com/mapfiles/ms/micons/green-dot.png"> results will appear hear</h1>
             <hr>
-          </div>
-            <div id="listing">
-                <table id="resultsTable">
-                  <tr>
-                    <td id="results"></td></td>
-                  </tr>
-                  <tr>
-                    <td id="results"></td>
-                  </tr>
-                </table>
-            </div>
+          <div id="listing">
+            <table id="resultsTable">
+              <tr >
+                <td id="results"></td>
+              </tr>
+              
+            </table>
         </div>
-    
+        </div>
+      </div>
+    </div>
+<!--END TEST CARD CASES-->
+      
    
       <div style="display: grid">
         <div id="info-content">
@@ -248,15 +341,7 @@
       
       
    
-      <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-      <div id="map"></div>
-      <div id="infowindow-content">
-        <img id="place-icon" src="" height="16" width="16">
-        <span id="place-name"  class="title"></span><br>
-        <span id="place-id"></span><br>
-        <span id="place-address"></span>
-      </div>
-
+      
     
     <script type="text/javascript"></script>
     <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap" async></script>-->

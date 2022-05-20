@@ -210,10 +210,6 @@ function addResult(result, i) {
   
   //create table table column
   tr.style.backgroundColor = i % 2 === 0 ? "#F0F0F0" : "#FFFFFF";
-  tr.style.flexDirection = "row";
-  tr.style.flexFlow= i? "row-wrap":
-  tr.style.flexFlow = "row-wrap";
-  
   tr.onclick = function () {
     google.maps.event.trigger(markers[i], "click");
   };
@@ -223,6 +219,7 @@ function addResult(result, i) {
   const iconTd = document.createElement("td");
   const nameTd = document.createElement("td");
   const icon = document.createElement("img");
+  
   //another icon
   const Copy = document.createElement("img");
  
@@ -233,7 +230,7 @@ function addResult(result, i) {
   icon.setAttribute("className", "placeIcon");
  
   const name = document.createTextNode(result.name);
- 
+  
   iconTd.appendChild(icon);
   //iconTd.appendChild(Copy);
   nameTd.appendChild(name);
