@@ -208,17 +208,27 @@ function addResult(result, i) {
   
   
   
+  
   //create table table column
   tr.style.backgroundColor = i % 2 === 0 ? "#F0F0F0" : "#FFFFFF";
+  tr.style.inlineSize =  "300px";
   tr.onclick = function () {
     google.maps.event.trigger(markers[i], "click");
   };
 
   
  
+
+  
+ 
   const iconTd = document.createElement("td");
   const nameTd = document.createElement("td");
   const icon = document.createElement("img");
+  //new td item
+  const ratingTd = document.createElement("td");
+  
+  
+  //end td item
   
   //another icon
   const Copy = document.createElement("img");
@@ -230,12 +240,24 @@ function addResult(result, i) {
   icon.setAttribute("className", "placeIcon");
  
   const name = document.createTextNode(result.name);
+  const rating = document.createTextNode(result.rating);
+ 
+  
+
+  
+
   
   iconTd.appendChild(icon);
   //iconTd.appendChild(Copy);
   nameTd.appendChild(name);
+  ratingTd.appendChild(rating);
+  
+  
   tr.appendChild(iconTd);
   tr.appendChild(nameTd);
+  tr.appendChild(ratingTd);
+  
+ 
   results.appendChild(tr);
 }
  
@@ -367,11 +389,12 @@ function whereAmI(position) {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
       },
+      zoom: 16,
   });
   location_marker.setMap(map);
   markers.push(location_marker);
-  map.panTo(whereAmI);
-  map.setZoom(15);
+
+
 }
 
 const features = [];
@@ -379,15 +402,14 @@ const features = [];
         let directionsService;
         let directionsRenderer;
         let mapCenter = { lat: 0.1769, lng: 37.9083 };
+        
+        
 
         window.onload = function () {
             let buttonAdd = document.getElementById("btnWhereAmI");
             buttonAdd.addEventListener("click", () => {
                 if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(whereAmI, geoLocateErrorhandler);
-                    map.panTo(navigator.geolocation.getCurrentPosition);
-                    map.setZoom(15);
-                    search();
+                    navigator.geolocation.getCurrentPosition(whereAmI, geoLocateErrorhandler, );
                 } else {
                     alert("Browser does not support Geo Location Service.");
                 }
